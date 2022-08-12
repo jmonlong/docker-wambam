@@ -31,7 +31,7 @@ WORKDIR /build
 
 RUN git clone https://github.com/rlorigro/wambam.git && \
     cd wambam && \
-    git co 2c24628af88af2ac58ffc1a1a2fe23b6fd014611 && \
+    git checkout 2c24628af88af2ac58ffc1a1a2fe23b6fd014611 && \
     mkdir build && cd build && \
     cmake .. && make
 
