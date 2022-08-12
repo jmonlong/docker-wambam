@@ -17,24 +17,22 @@ RUN apt-get update \
     sudo \
     less \
     pkg-config \
-    apt-transport-https software-properties-common dirmngr gpg-agent \ 
-    && rm -rf /var/lib/apt/lists/*
-
-ENV TZ=America/Los_Angeles
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
     cmake \
     zlib1g-dev \
     libcurl4-openssl-dev \
     libbz2-dev \
     autoconf \
+    apt-transport-https software-properties-common dirmngr gpg-agent \ 
     && rm -rf /var/lib/apt/lists/*
+
+ENV TZ=America/Los_Angeles
 
 WORKDIR /build
 
 RUN git clone https://github.com/rlorigro/wambam.git && \
-    mkdir wambam/build && cd wambam/build && \
+    cd wambam && \
+    git co 2c24628af88af2ac58ffc1a1a2fe23b6fd014611 && \
+    mkdir build && cd build && \
     cmake .. && make
 
 ENV PATH=/build/wambam/build:$PATH
